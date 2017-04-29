@@ -18,5 +18,5 @@ composer_add_to_path: true
 
 # GitHub OAuth token (used to help overcome API rate limits).
 composer_github_oauth_token: ''
-satis_username: snowfall
-satis_password: snowfall100!
+satis_username: secret1
+satis_password: secret2

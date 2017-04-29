@@ -21,7 +21,7 @@
 #  - name: Clone git repository
 #    git: >
 #      dest="{{ repo_path }}"
-#      repo=git@gitlab.snowfall.se:pac/my-app-repository.git
+#      repo=git@github.com:brunobozic/SampleNetCoreApp.git
 #      update=yes 
 #      force=yes
 #  #  sudo: yes

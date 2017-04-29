@@ -20,7 +20,7 @@ xdebug:
     install: '1'
 composer:
     install: '1'
-repo_path: wisp-installer-repository
+repo_path: my-app-repository
 staging_per_portal: staging-per-portal
 # Configure Vagrant VM to use Host DNS for VPN.
 # This usually makes the box connections a little faster,

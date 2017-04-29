@@ -48,8 +48,7 @@
 #              regexp=';?phar.readonly = \s'
 #              line='phar.readonly = Off'
   register: retval_phar_readonly
-  tags: wisp-installer-repo
 
-- name: "Debug ROLE wisp-installer-repo fact Setup php.ini to disable the phar.readonly security feature"
+- name: "Debug ROLE wmy-app-repository fact Setup php.ini to disable the phar.readonly security feature"
   debug:
     msg={{ retval_phar_readonly }}

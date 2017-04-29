@@ -1,4 +1,4 @@
 ---
-satis_username: secret1
-satis_password: secret2
+x_username: secret1
+x_password: secret2
 tmp_directory: "{{ lookup('env', 'TMPDIR') | default('/tmp', true) }}"

@@ -47,7 +47,7 @@ end
 options = options.merge(system_options)
 
 # If you are running something else than up or provision, default box_name to current name
-current_box_name = 'dev-box'
+current_box_name = 'php-dev-box'
 box_name = current_box_name
 
 output.info("vagrant_root is #{box_name}", color_info)
@@ -121,7 +121,7 @@ Vagrant.configure("2") do |config|
     # Deny SSH Agent Forward from The Box
     config.ssh.forward_agent = false
 
-    config.vm.hostname = "dev-box"
+    config.vm.hostname = "php-dev-box"
 
     config.vm.box = "ubuntu/trusty64"
     

@@ -2,8 +2,8 @@
 # Path to NFS share. This is where all development repos will go.
 # repo_path: repos/
 
-repo_path: /home/brunobozic/Boxes/wisp-buildbox/myRepo
-repo_path_vagrant: /home/vagrant/my-repository
+repo_path: /home/brunobozic/Boxes/php-dev-box/my-app-repository
+repo_path_vagrant: /home/vagrant/my-app-repository
 per_portal_staging_path_vagrant: /home/vagrant/staging-per-portal
 per_portal_staging_path_host: /home/brunobozic/Boxes/buildbox/staging-per-portal
 # Configurable NFS mount options.

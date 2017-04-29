@@ -1,0 +1,6 @@
+---
+- name: Install lynx
+  apt:
+    name: lynx
+    update_cache: yes
+  sudo: yes

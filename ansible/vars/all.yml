@@ -1,0 +1,59 @@
+---
+server:
+    install: '1'
+    packages: [git, npm, vim]
+    timezone: UTC
+    locale: en_US.UTF-8
+vagrant_local:
+    install: '1'
+    vm: { base_box: trusty64, hostname: default, ip: 192.168.31.91, memory: '1024', sharedfolder: ./, syncType: nfs }
+nginx:
+    install: '1'
+    docroot: /vagrant
+    servername: myApp.vb
+php:
+    install: '1'
+    ppa: php5-5.6
+    packages: [php5.6-cli, php5.6-intl, php5.6-zip, php5.6-xml, php5.6-phpdbg, php5.6-fpm, php5.6-mcrypt, php5.6-curl, php5.6-gd, php5.6-common, php5.6-mysql, php5.6-mysqlnd, php5.6-memcache, php5.6-memcached, php5.6-xdebug, php5.6-mbstring, php5.6-bcmath, php5-dev, php-pear]
+    peclpackages: [bz2, phar]
+xdebug:
+    install: '1'
+composer:
+    install: '1'
+repo_path: wisp-installer-repository
+staging_per_portal: staging-per-portal
+# Configure Vagrant VM to use Host DNS for VPN.
+# This usually makes the box connections a little faster,
+# but in rare cases it can result in failed connections.
+# Try adding Google's DNS servers, 8.8.8.8 and 8.8.4.4, first.
+nat_dns_host_resolver: true
+#- php5-phalcon
+#- php5.6
+#- php5.6-bcmath
+#- php5.6-bz2
+#- php5.6-cli
+#- php5.6-curl
+#- php5.6-fpm
+#- php5.6-gd
+#- php5.6-intl
+#- php5.6-mbstring
+#- php5.6-mcrypt
+#- php5.6-mysql
+#- php5.6-phpdbg
+#- php5.6-zip
+#- php5.6-xml
+
+#__php_ini:
+#- { section: PHP, option: error_reporting, value: E_ALL }
+#- { section: PHP, option: realpath_cache_size, value: 1m }
+#- { section: PHP, option: realpath_cache_ttl, value: 300 }
+#- { section: PHP, option: display_errors, value: On }
+#- { section: PHP, option: display_startup_errors, value: On }
+#- { section: PHP, option: track_errors, value: On }
+#- { section: Date, option: date.timezone, value: UTC }
+#- { section: Session, option: session.use_strict_mode , value: 1 }
+#- { section: Assertion, option: zend.assertions, value: 1 }
+#- { section: mbstring, option: mbstring.http_input, value: pass }
+#- { section: mbstring, option: mbstring.http_output, value: pass }
+satis_username: secret1
+satis_password: secret2

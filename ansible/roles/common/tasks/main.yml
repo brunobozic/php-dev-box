@@ -1,0 +1,19 @@
+---
+- name: Ensure /root/.ssh is present
+  file:
+    state: directory
+    path: ~/.ssh/
+
+- name: Ensure github.com is a known host for root
+  known_hosts:
+    path: ~/.ssh/known_hosts
+    name: github.com
+    key: "{{ lookup('file', 'github.com.pub') }}"
+
+- name: Ensure github.com is a known host for vagrant
+  become: no
+  known_hosts:
+    path: ~/.ssh/known_hosts
+    name: github.com
+    key: "{{ lookup('file', 'github.com.pub') }}"
+

@@ -1,0 +1,61 @@
+---
+- name: Install Phalcon prerequisites
+  apt: name={{ item }} state=installed
+  with_items:
+        - php5.6-dev
+        - libpcre3-dev
+        - gcc
+        - make
+        - git
+  tags: 
+   phalcon
+
+- name: Check to see if phalcon was already installed, if so, skip all further steps
+  shell: php -m | grep phalcon
+  register: reg_phalcon_is_registered_as_php_module
+  ignore_errors: yes
+  tags: 
+   phalcon
+
+- name: Set fact - need_to_install_phalcon
+  set_fact:
+    need_to_install_phalcon: true
+  when: reg_phalcon_is_registered_as_php_module is not undefined 
+  tags: 
+   phalcon
+
+- name: Clone Phalcon {{ phalcon.target_version }} from git
+  git: repo=git://github.com/phalcon/cphalcon.git dest=/home/ubuntu/cphalcon clone=yes depth=1 update=yes version={{ phalcon.target_version }}
+  when: need_to_install_phalcon
+  tags: 
+   phalcon
+
+- name: Install Phalcon
+  action: command {{ item }} chdir=/home/ubuntu/cphalcon/build
+  with_items:
+    - ./install
+  when: need_to_install_phalcon
+  tags: 
+   phalcon
+
+- name: Copy phalcon.ini
+  copy: src=files/phalcon.ini dest=/etc/php/5.6/mods-available/phalcon.ini owner=root group=root mode=0644
+  with_items:
+    - cli
+    - fpm
+    - apache2
+#  when: need_to_install_phalcon
+  ignore_errors: true
+  tags: 
+   phalcon
+
+- name: Link phalcon extension
+  action: file src=/etc/php/5.6/mods-available/phalcon.ini dest=/etc/php/5.6/{{item}}/conf.d/20-phalcon.ini state=link
+  with_items:
+    - cli
+    - fpm
+    - apache2
+# when: need_to_install_phalcon
+  ignore_errors: true
+  tags: 
+   phalcon

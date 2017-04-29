@@ -1,0 +1,55 @@
+---
+
+- name: "Debug ROLE my-app-repository fact"
+  debug:
+    msg='{{ repo_path }}'
+
+- name: Ensure repo_path directory exists.
+  file:
+    path: "{{ repo_path }}"
+    owner: "vagrant"
+    group: "vagrant"
+    state: directory
+
+- name: Ensure staging-per-portal directory exists.
+  file:
+    path: "{{ staging_per_portal }}"
+    owner: "vagrant"
+    group: "vagrant"
+    state: directory
+
+#  - name: Clone git repository
+#    git: >
+#      dest="{{ repo_path }}"
+#      repo=git@gitlab.snowfall.se:pac/my-app-repository.git
+#      update=yes 
+#      force=yes
+#  #  sudo: yes
+#  #  sudo_user: vagrant
+#    become: true
+#    become_user: vagrant
+
+#  sudo_user: www-data
+
+#  - name: Install auth for x
+#    shell: composer config -g x {{x_username}} 
+#  {{x_password}}
+#    register: retval_x
+#    changed_when: retval_x.rc == 1
+
+### Remove phar readonly
+#nano /etc/php.d/20-phar.ini
+#add: phar.readonly=0
+# /etc/php/5.6/cli/conf.d/20-phar.ini,
+- name: Setup php.ini to disable the phar.readonly security feature
+  lineinfile: dest=/etc/php/5.6/cli/php.ini
+              regexp=';phar.readonly = On'
+              line='phar.readonly = Off'
+#              regexp=';?phar.readonly = \s'
+#              line='phar.readonly = Off'
+  register: retval_phar_readonly
+  tags: wisp-installer-repo
+
+- name: "Debug ROLE wisp-installer-repo fact Setup php.ini to disable the phar.readonly security feature"
+  debug:
+    msg={{ retval_phar_readonly }}

@@ -1,0 +1,23 @@
+---
+- hosts: all
+  sudo: true
+  vars_files:
+    - vars/all.yml
+  roles:
+    - server
+    - vagrant_local
+    - apache
+    - php
+    - composer
+    - common
+    - nodejs
+    - git
+#    - grunt
+    - grunt-cli
+    - bower
+#    - java
+    - phalcon
+    - box2
+    - mysql
+    - lynx
+    - my-app-repository

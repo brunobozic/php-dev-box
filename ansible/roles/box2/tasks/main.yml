@@ -1,0 +1,85 @@
+---
+- name: Get installed version
+  command: box -V warn=no
+  changed_when: false
+  failed_when: false
+  register: box_installed_version 
+  tags:
+    box2
+
+#- name: "Debug ROLE Box2 fact - box_installed_version"
+#  debug:
+#    msg='{{ box_installed_version }}'
+#  tags:
+#    box2
+
+#- set_fact:
+#    version_result: '{{ box_installed_version.stdout }}'
+#  when: box_installed_version is defined and box_installed_version.stdout is defined
+#  tags:
+#    box2
+
+#- name: "Debug ROLE Box2 fact - version_result"
+#  debug:
+#    msg='{{ version_result }}'
+#  ignore_errors: true
+#  tags:
+#    box2
+
+# Box version 2.7.4 build e50fa221d596582eef4793e214813d5f34e79c59
+#- set_fact:
+#    regexp_result: '{{ box_installed_version.stdout | regex_replace("(?<=Box version ).*?(?=build)") }}'
+#  when: box_installed_version.msg is defined and "'Errno 2' not in box_installed_version.msg"
+#  tags:
+#    box2
+
+#- name: "Debug ROLE Box2 regexp_result"
+#  debug:
+#    msg={{ regexp_result }}
+#  when: box_installed_version.msg is defined and "'Errno 2' not in box_installed_version.msg"
+#  tags:
+#    box2
+
+#- name: Force box install if the version numbers do not match
+#  set_fact:
+#    box_reinstall_from_source: true
+#  when: '(box_installed_version|success and (box_installed_version.stdout | regex_replace("^.*?([0-9\.]+)$", "\\1") | version_compare(box_version, operator="!=")))'
+#  tags:
+#    box2
+
+- name: Download box2 through php
+  shell: 
+    curl -LSs https://box-project.github.io/box2/installer.php | php
+#  when:  box_installed_version|failed
+  register: box_download_and_install
+  become: true
+#  changed_when:
+#    "'Box installed!' in box_download_and_install.stdout"
+#  when: version_result is not defined or "'Box version' not in box_installed_version.stdout"
+#  failed_when: "'Box installed!' not in box_download_and_install.stdout"
+  tags:
+    box2  
+
+#- name: "Debug ROLE Box2 standard output of box installation"
+#  debug:
+#    msg='{{ box_download_and_install }}'
+#  tags:
+#    box2
+
+- name: Make box executable
+  shell: 
+     mv box.phar /usr/bin/box
+#  when:  box_installed_version|failed
+  register: box_moving
+  become: true
+#  when: "'Box version' not in version_result"
+#  when: version_result is not defined or 'Box version' not in version_result
+  tags:
+    box2 
+
+#- name: "Debug ROLE Box2 moving the binaries to bin/box"
+#  debug:
+#    msg='{{ box_moving }}'
+#  when: version_result is not defined or 'Box version' not in version_result
+#  tags:
+#    box2

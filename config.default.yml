@@ -1,0 +1,15 @@
+---
+# Path to NFS share. This is where all development repos will go.
+# repo_path: repos/
+
+repo_path: /home/brunobozic/Boxes/wisp-buildbox/myRepo
+repo_path_vagrant: /home/vagrant/my-repository
+per_portal_staging_path_vagrant: /home/vagrant/staging-per-portal
+per_portal_staging_path_host: /home/brunobozic/Boxes/buildbox/staging-per-portal
+# Configurable NFS mount options.
+# These options can heavily impact the performance of the box,
+# but can in some cases make it more stable.
+#nfs_mount_options: nolock,vers=3,udp,noatime,actimeo=1,dmode=777,fmode=777
+nfs_mount_options: nolock,vers=3,udp,noatime,actimeo=1,dmode=777,fmode=777
+nfs_mount_options_safe: dmode=777,fmode=777
+ansible_verbosity: vvvv

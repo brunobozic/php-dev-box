@@ -1,0 +1,44 @@
+---
+- name: Add ppa Repository
+  sudo: yes
+  apt_repository: repo=ppa:ondrej/php
+
+- name: Update apt
+  sudo: yes
+  apt: update_cache=yes
+
+- name: Install php5.6
+  sudo: yes
+  apt: pkg=php5.6 state=latest
+
+- name: Install php5.6-fpm
+  sudo: yes
+  apt: pkg=php5.6-fpm state=latest
+
+- name: Install PHP Packages
+  sudo: yes
+  apt: pkg={{ item }} state=latest
+  with_items: 
+    - php5.6-cli
+    - php5.6-intl
+    - php5.6-zip
+    - php5.6-xml
+    - php5.6-phpdbg
+    - php5.6-fpm
+    - php5.6-mcrypt
+    - php5.6-curl
+    - php5.6-gd
+    - php5.6-common 
+    - php5.6-mysql 
+    - php5.6-mysqlnd 
+    - php5.6-memcache 
+    - php5.6-memcached
+    - php5.6-xdebug
+    - php5.6-mbstring
+    - php5.6-bcmath 
+    - php5.6-bz2
+    - php5-dev 
+    - php-pear
+
+- include: configure.yml
+- include: pecl.yml

@@ -1,0 +1,22 @@
+---
+- name: Install Bower package
+  npm: >
+    name=bower
+    state=present
+    global=yes
+    version={{ bower_version }}
+  tags: bower
+
+# nano /root/.bowerrc
+# add: { "allow_root": true }
+- name: Allowing root for bower in root/.bowerrc,
+  lineinfile:
+    dest={{ item }}
+    line=' "allow_root":"true" '
+    create=yes
+  with_items:
+    - /root/.bowerrc
+  become:
+    yes
+  tags:
+    bower

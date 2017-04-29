@@ -1,0 +1,3 @@
+---
+phalcon:
+    target_version: 3.0.x
